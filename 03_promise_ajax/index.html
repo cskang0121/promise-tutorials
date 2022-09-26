@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise AJAX</title>
+</head>
+<body>
+    <h2 style="font-family:Arial, Helvetica, sans-serif">AJAX Promise</h2>
+    <button id="btn">Send AJAX Request</button>
+
+    <script>
+
+        const button = document.querySelector('#btn')
+
+        /* Original Promise
+        btn.onclick = () => {
+
+            const promise = new Promise((resolve, reject) => {
+                
+                const xhr = new XMLHttpRequest()
+                
+                xhr.open('GET', 'https://api.github.com/search/users?q=cskang0121')
+                
+                xhr.send()
+                
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            resolve(xhr.response)
+                        } else {
+                            reject(xhr.status)
+                        }
+                    }
+                }
+            })
+
+            promise.then(
+                value => console.log(value),
+                reason => console.warn(reason)
+            )
+        }
+        */
+        
+        // Modularisation
+        btn.onclick = () => {
+            const promise = sendRequest('https://api.github.com/search/users?q=cskang0121')
+            
+            console.log(promise)
+            
+            promise.then(
+                value => console.log(value),
+                reason => console.warn(reason)
+            )
+        }
+
+        // Convert the AJAX request into a function
+        const sendRequest = (url) => {
+            return new Promise((resolve, reject) => {
+                
+                const xhr = new XMLHttpRequest()
+                
+                xhr.open('GET', url)
+                
+                xhr.send()
+                
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            resolve(xhr.response)
+                        } else {
+                            reject(xhr.status)
+                        }
+                    }
+                }
+            })
+        }
+    
+    </script>
+</body>
+</html>

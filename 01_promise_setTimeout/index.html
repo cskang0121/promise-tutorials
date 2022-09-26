@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise SetTimeout</title>
+</head>
+<body>
+  <script>
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const value = Math.random()
+        value < .5 ? resolve(value) : reject(value)
+      }, 200)
+    })
+
+    promise.then(
+      (value) => alert('Success：' + value),
+      (reason) => alert('Failure：' + reason)
+    )
+  </script>
+</body>
+</html>
